@@ -1,0 +1,38 @@
+{
+	"connections": [
+		{
+		 "name": "server mysql",
+		 "database_type": "mysql",
+		 "port": 3306,
+		 "username": "root",
+		 "password": "1234",
+		 "host": "127.0.0.1",
+		 "database": "sakila"
+		},
+		{
+		 "name": "server microsoft",
+		 "database_type": "mssql",
+		 "port": 1443,
+		 "username": "root",
+		 "password": "1234",
+		 "host": "127.0.0.1",
+                 "database": "sakila_restored"
+		},
+		{
+		 "name": "server postgresql",
+		 "database_type": "postgresql",
+		 "port": 5432,
+		 "username": "root",
+		 "password": "1234",
+		 "host": "127.0.0.1",
+                 "database": "sakila_restored"
+		}
+	],
+	"queries": [
+		{
+		 "name": "query1",
+		 "query": "SELECT * FROM tabella1"
+		}
+	],
+	"golden": "server mysql"
+}
