@@ -3,7 +3,8 @@ import java.sql.SQLException;
 import java.sql.*;
 
 public class DBComparer {
-    public DBManager manager;
+    DBManager manager;
+    JsonHandler jsonHandler;
     public static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     public static final String POSTGRESQL_DRIVER = "mssql-jdbc-8.4.1.jre8.jar";
     public static final String ORACLE_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -98,6 +99,7 @@ public class DBComparer {
             System.out.println("RESULT SET 1: \n" + dbComparer.printResultSet(rs1));
             System.out.println("RESULT SET 2: \n" + dbComparer.printResultSet(rs2));
             System.out.println(dbComparer.compareResultSets(rs1, rs2));
+            dbComparer.jsonHandler = new JsonHandler();
 
         } catch (SQLException e) {
             e.printStackTrace();

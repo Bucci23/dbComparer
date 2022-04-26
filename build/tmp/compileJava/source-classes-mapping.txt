@@ -1,4 +1,12 @@
-DBComparer.java
- DBComparer
+ConnectionProperties.java
+ ConnectionProperties
 DBManager.java
  DBManager
+DBComparer.java
+ DBComparer
+Operations.java
+ Operations
+Query.java
+ Query
+JsonHandler.java
+ JsonHandler
