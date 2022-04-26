@@ -10,14 +10,14 @@ import java.sql.*;
 public class DBManager {
     public static String JDBC_Driver = null;
     public static String JDBC_URL = null;
-    static Connection connection;
+    Connection connection;
 
-    public static void setConnection(String Driver, String URL) {
+    public void setConnection(String Driver, String URL) {
         JDBC_Driver = Driver;
         JDBC_URL = URL;
     }
 
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         if (connection == null) {
             if (JDBC_Driver == null || JDBC_URL == null) {
                 throw new IllegalStateException("Illegal request. Call setConnection() before.");
@@ -33,7 +33,7 @@ public class DBManager {
         return connection;
     }
 
-    public static void showMetadata() throws SQLException {
+    public void showMetadata() throws SQLException {
         if (connection == null) {
             throw new IllegalStateException("Illegal request. Connection not established");
         }
@@ -48,7 +48,7 @@ public class DBManager {
         System.out.println("Supports CONCUR_UPDATABLE: " + md.supportsResultSetType(ResultSet.CONCUR_UPDATABLE));
     }
 
-    public static void close() throws SQLException {
+    public void close() throws SQLException {
         if (connection != null) {
             connection.close();
         }
