@@ -18,12 +18,31 @@ public class ConnectionProperties {
         this.database = database;
     }
 
-    public String UrlBuilder() {
-        if(database_type.equals("mysql"))
-            return "jdbc:mysql://" + host + ":" + port + "/" + database + "?" + "username=" + username + "&password=" + password;
-        if(database_type.equals("mssql"))
+    public String getUrl() {
+        if (database_type.equals("mysql"))
+            return "jdbc:mysql://" + host + ":" + port + "/" + database + "?username=" + username + "&password=" + password;
+        if (database_type.equals("mssql"))
             return "jdbc:sqlserver://" + host + ":" + port + ";databaseName=" + database + ";" + "user=" + username + ";password=" + password;
+        if (database_type.equals("postgresql"))
+            return "jdbc:postgresql://" + host + ":" + port + "/" + database + "?user=" + username + "&password=" + password;
+        if(database_type.equals("oracle"))
+            return "oracle url";
         return null;
+    }
+
+    public String getDriver(){
+        if (database_type.equals("mysql"))
+            return "com.mysql.cj.jdbc.Driver";
+        if (database_type.equals("postgresql"))
+            return "org.postgresql.Driver ";
+        if (database_type.equals("oracle"))
+            return "oracle.jdbc.driver.OracleDriver";
+        if (database_type.equals("mssql"))
+            return "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        else{
+            System.out.println("DATABASE TYPE NOT SUPPORTED");
+            return null;
+        }
     }
 
     @Override

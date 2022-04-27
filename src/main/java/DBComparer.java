@@ -7,12 +7,6 @@ import java.util.List;
 public class DBComparer {
     DBManager manager;
     JsonHandler jsonHandler;
-    public static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
-    public static final String POSTGRESQL_DRIVER = "mssql-jdbc-8.4.1.jre8.jar";
-    public static final String ORACLE_DRIVER = "com.mysql.cj.jdbc.Driver";
-    public static final String SQLSERVER_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-
-
     public String compareResultSets(ResultSet resultSet1, ResultSet resultSet2) throws SQLException {
         StringBuilder msg = new StringBuilder("ok");
         resultSet1.first();
@@ -73,12 +67,12 @@ public class DBComparer {
         return null;
     }
 
-    public ResultSet getResultSet(String url, String query) {
-        System.out.println("Connecting to url: " + url);
+    public ResultSet getResultSet(ConnectionProperties cProp, String query) {
+        System.out.println("Connecting to url: " + cProp.getUrl());
         manager = new DBManager();
 
         try {
-            manager.setConnection(SQLSERVER_DRIVER, url);
+            manager.setConnection(cProp.getDriver(), cProp.getUrl());
             Connection c = manager.getConnection();
             Statement statement = c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = statement.executeQuery(query);
@@ -103,7 +97,7 @@ public class DBComparer {
 
             for (Query j : o.getQueries()) {
                 k++;
-                resultSets.add(k, dbComparer.getResultSet(i.UrlBuilder(), j.getQuery()));
+                resultSets.add(k, dbComparer.getResultSet(i, j.getQuery()));
                 System.out.println("RESULTS FROM " + i.getName() + "QUERY " + j.getName() + ":  " + dbComparer.printResultSet(resultSets.get(k)));
             }
 
