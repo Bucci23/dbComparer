@@ -3,13 +3,23 @@ import java.util.List;
 public class Operations {
     List<ConnectionProperties> connections;
     List<Query> queries;
+    String golden;
 
     @Override
     public String toString() {
         return "Operations{" +
                 "connections=" + connections +
                 ", queries=" + queries +
+                ", golden='" + golden + '\'' +
                 '}';
+    }
+
+    public String getGolden() {
+        return golden;
+    }
+
+    public void setGolden(String golden) {
+        this.golden = golden;
     }
 
     public List<ConnectionProperties> getConnections() {
@@ -28,8 +38,9 @@ public class Operations {
         this.queries = queries;
     }
 
-    public Operations(List<ConnectionProperties> connections, List<Query> queries) {
+    public Operations(List<ConnectionProperties> connections, List<Query> queries, String golden) {
         this.connections = connections;
         this.queries = queries;
+        this.golden = golden;
     }
 }

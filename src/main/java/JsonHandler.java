@@ -23,10 +23,4 @@ public class JsonHandler {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        JsonHandler jsonHandler = new JsonHandler();
-        Operations c = jsonHandler.jsonToConnnection("esempio_json.json");
-        System.out.println(c.toString());
-    }
 }

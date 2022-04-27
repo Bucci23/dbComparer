@@ -28,7 +28,6 @@ public class DBManager {
                 e.printStackTrace();
             }
             connection = DriverManager.getConnection(JDBC_URL);
-            //showMetadata();
         }
         return connection;
     }

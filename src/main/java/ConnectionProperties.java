@@ -18,6 +18,14 @@ public class ConnectionProperties {
         this.database = database;
     }
 
+    public String UrlBuilder() {
+        if(database_type.equals("mysql"))
+            return "jdbc:mysql://" + host + ":" + port + "/" + database + "?" + "username=" + username + "&password=" + password;
+        if(database_type.equals("mssql"))
+            return "jdbc:sqlserver://" + host + ":" + port + ";databaseName=" + database + ";" + "user=" + username + ";password=" + password;
+        return null;
+    }
+
     @Override
     public String toString() {
         return "ConnectionProperties{" +
