@@ -1,12 +1,12 @@
-ConnectionProperties.java
- ConnectionProperties
+JsonHandler.java
+ JsonHandler
 DBManager.java
  DBManager
+ConnectionProperties.java
+ ConnectionProperties
+Operations.java
+ Operations
 Query.java
  Query
 DBComparer.java
  DBComparer
-Operations.java
- Operations
-JsonHandler.java
- JsonHandler

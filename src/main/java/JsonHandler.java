@@ -15,9 +15,7 @@ public class JsonHandler {
         Gson gson = new Gson();
         try {
             FileReader f = new FileReader(filename);
-            Operations operations = gson.fromJson(f, Operations.class);
-            System.out.println(operations.toString());
-            return operations;
+            return gson.fromJson(f, Operations.class);
         } catch (FileNotFoundException | JsonIOException e) {
             e.printStackTrace();
         }

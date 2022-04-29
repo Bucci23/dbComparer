@@ -1,3 +1,4 @@
+import java.sql.*;
 
 public class ConnectionProperties {
     String name;
@@ -7,6 +8,7 @@ public class ConnectionProperties {
     String password;
     String host;
     String database;
+    String schema;
 
     public ConnectionProperties(String name, String database_type, int port, String username, String password, String host, String database) {
         this.name = name;
@@ -18,15 +20,23 @@ public class ConnectionProperties {
         this.database = database;
     }
 
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
+    }
+
     public String getUrl() {
         if (database_type.equals("mysql"))
-            return "jdbc:mysql://" + host + ":" + port + "/" + database + "?username=" + username + "&password=" + password;
+            return "jdbc:mysql://" + username + ":" + password + "@" + host + ":" + port + "/" + database;
         if (database_type.equals("mssql"))
             return "jdbc:sqlserver://" + host + ":" + port + ";databaseName=" + database + ";" + "user=" + username + ";password=" + password;
         if (database_type.equals("postgresql"))
-            return "jdbc:postgresql://" + host + ":" + port + "/" + database + "?user=" + username + "&password=" + password;
+            return "jdbc:postgresql://" + host + ":" + port + "/" + database + "?user=" + username + "&password=" + password + "&currentSchema=" + schema;
         if(database_type.equals("oracle"))
-            return "oracle url";
+            return "jdbc:oracle:thin:" + username + "/" + password + "@" + host +":"+ port + "/" + database;
         return null;
     }
 
@@ -42,6 +52,13 @@ public class ConnectionProperties {
         else{
             System.out.println("DATABASE TYPE NOT SUPPORTED");
             return null;
+        }
+    }
+
+    public void extraActions(Connection c) throws SQLException{
+        if(database_type.equals("oracle")) {
+            Statement s = c.createStatement();
+            s.executeQuery("ALTER SESSION SET CURRENT_SCHEMA = \"" + schema + "\"");
         }
     }
 

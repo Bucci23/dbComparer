@@ -1,3 +1,4 @@
+import java.sql.Connection;
 import java.util.List;
 
 public class Operations {
@@ -12,6 +13,14 @@ public class Operations {
                 ", queries=" + queries +
                 ", golden='" + golden + '\'' +
                 '}';
+    }
+    public ConnectionProperties getGoldenDB(){
+        for(ConnectionProperties i: connections){
+            if(i.name.equals(golden))
+                return i;
+        }
+        System.err.println("Golden Not Found");
+        return  null;
     }
 
     public String getGolden() {
